@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:50:49 by nteechar          #+#    #+#             */
-/*   Updated: 2024/12/11 12:29:23 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:23:29 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ static void	evaluate_line(char *line, t_shell_data *data)
 	t_command_list	*commands;
 	int				ret;
 
+	if (ft_strlen(line) == 0)
+	{
+		data->exit_status = SUCCESS;
+		return ;
+	}
 	commands = NULL;
 	ret = parse_line(line, data, &commands);
 	if (ret == EINVAL || commands == NULL)
