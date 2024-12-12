@@ -1,21 +1,21 @@
 # Minishell Issues
 
-## Must
+## (DONE) ~~Must~~
 
-- (DONE) **Environment Variables:**
+- (DONE) ~~**Environment Variables:**~~
   - Must update `$SHLVL` and increment by 1 during shell initialization.
   - Must update `$PWD` and `$OLDPWD` when using the `cd` command.
 
-- (DONE) **Echo:**
+- (DONE) ~~**Echo:**~~
   - Running `echo "$"` must print `$`.
 
-- (DONE) **Exit Status:**
+- (DONE) ~~**Exit Status:**~~
   - The `exit_status` must equal `2` after a bad or incorrect syntax command.
 
-- (DONE) **Export:**
+- (DONE) ~~**Export:**~~
   - Must print sorted rows of `declare -x var`.
 
-- (DONE) **`cd` (chdir) Issue:**
+- (DONE) ~~**`cd` (chdir) Issue:**~~
   1. Create a directory:
      ```bash
      mkdir tmp
