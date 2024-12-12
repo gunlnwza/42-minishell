@@ -11,3 +11,6 @@ minishell
 #
 
 log
+
+minishell_tester
+test.sh
