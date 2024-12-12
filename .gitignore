@@ -1,0 +1,13 @@
+# untracked programs
+*.o
+*.a
+*.out
+minishell
+#
+
+# folders
+.*_objs
+.vscode
+#
+
+log
