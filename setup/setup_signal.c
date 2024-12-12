@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:38:43 by pesrisaw          #+#    #+#             */
-/*   Updated: 2024/12/11 17:05:27 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:25:24 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ static void	set_signal_action(int signum, void (*func)(int), int flags)
 {
 	struct sigaction	sa;
 
-	ft_bzero(sa, sizeof(sa));
+	ft_bzero(&sa, sizeof(sa));
 	sa.sa_handler = func;
 	sa.sa_flags = flags;
-	if (sigemptyset(&sa.sa_mask) < 0 || sigaction(signum, sa, NULL) < 0)
+	if (sigemptyset(&sa.sa_mask) < 0 || sigaction(signum, &sa, NULL) < 0)
 		ft_putstr_fd("set_signal_action\n", STDERR_FILENO);
 }
 
