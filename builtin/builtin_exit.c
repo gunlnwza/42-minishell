@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: pesrisaw <pesrisaw@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:34:18 by nteechar          #+#    #+#             */
-/*   Updated: 2024/12/12 19:15:41 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:11:54 by pesrisaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ static int	is_number(char *str)
 
 static int	numeric_arg_required_error(char *str)
 {
-	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+	ft_putstr_fd("exit\n", STDERR_FILENO);
+	if (str)
+	{
+		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+		ft_putstr_fd(str, STDERR_FILENO);
+		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+	}
 	return (2);
 }
 
@@ -61,7 +65,10 @@ t_exit_status	builtin_exit(t_command *cmd, t_shell_data *data)
 		else if (cmd->argc > 2)
 			exit_status = numeric_arg_required_error(cmd->argv[1]);
 		else if (cmd->argc == 2 && is_number(cmd->argv[1]))
+		{
 			exit_status = ft_atoi(cmd->argv[1]) % 256;
+			ft_putstr_fd("exit\n", STDERR_FILENO);
+		}
 		else
 			exit_status = numeric_arg_required_error(cmd->argv[1]);
 		free_command(cmd);

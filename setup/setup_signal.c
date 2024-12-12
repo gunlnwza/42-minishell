@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_signal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: pesrisaw <pesrisaw@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:38:43 by pesrisaw          #+#    #+#             */
-/*   Updated: 2024/12/12 18:25:24 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:02:36 by pesrisaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ static void	ft_sigint(int signal)
 	}
 }
 
-// static void	ft_sigquit(int signal)
-// {
-// 	if (signal != SIGQUIT)
-// 		return ;
-// 	if (g_signal_global == READ_MODE)
-// 	{
-// 		rl_on_new_line();
-// 		rl_redisplay();
-// 	}
-// 	else
-// 	{
-// 		ft_putstr_fd("^\\Quit (core dumped)\n", STDIN_FILENO);
-// 	}
-// }
+static void	ft_sigquit(int signal)
+{
+	if (signal != SIGQUIT)
+		return ;
+	if (g_signal_global == READ_MODE)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else
+	{
+		ft_putstr_fd("^\\Quit (core dumped)\n", STDIN_FILENO);
+	}
+}
 
 static void	set_signal_action(int signum, void (*func)(int), int flags)
 {
@@ -65,6 +65,6 @@ static void	set_signal_action(int signum, void (*func)(int), int flags)
 
 void	setup_signal(void)
 {
-	set_signal_action(SIGQUIT, SIG_IGN, 0);
+	set_signal_action(SIGQUIT, ft_sigquit, SA_RESTART);
 	set_signal_action(SIGINT, ft_sigint, SA_RESTART | SA_SIGINFO);
 }
