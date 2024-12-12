@@ -1,43 +1,38 @@
 # Minishell Issues
 
+## Must
 
-In Markdown, you can use the ~~ syntax to cross out text. Here's an example of how you can apply it to the "Must" section:
+- (DONE) **Environment Variables:**
+  - Must update `$SHLVL` and increment by 1 during shell initialization.
+  - Must update `$PWD` and `$OLDPWD` when using the `cd` command.
 
-markdown
-Copy code
-## ~~Must~~
+- (DONE) **Echo:**
+  - Running `echo "$"` must print `$`.
 
-- ~~**Environment Variables:**~~
-  - ~~Must update `$SHLVL` and increment by 1 during shell initialization.~~
-  - ~~Must update `$PWD` and `$OLDPWD` when using the `cd` command.~~
+- (DONE) **Exit Status:**
+  - The `exit_status` must equal `2` after a bad or incorrect syntax command.
 
-- ~~**Echo:**~~
-  - ~~Running `echo "$"` must print `$`.~~
+- (DONE) **Export:**
+  - Must print sorted rows of `declare -x var`.
 
-- ~~**Exit Status:**~~
-  - ~~The `exit_status` must equal `2` after a bad or incorrect syntax command.~~
-
-- ~~**Export:**~~
-  - ~~Must print sorted rows of `declare -x var`.~~
-
-- ~~**`cd` (chdir) Issue:~~
-  1. ~~Create a directory:~~
+- (DONE) **`cd` (chdir) Issue:**
+  1. Create a directory:
      ```bash
      mkdir tmp
      ```
-  2. ~~Navigate into it:~~
+  2. Navigate into it:
      ```bash
      cd tmp
      mkdir tmp2
      cd tmp2
      ```
-  3. ~~Try removing the parent directory:~~
+  3. Try removing the parent directory:
      ```bash
      rm -rf ../../tmp
      ```
-     ~~The shell **should not exit** in this scenario.~~
+     The shell **should not exit** in this scenario.
 
-~~~
+---
 
 ## Should
 
@@ -73,5 +68,3 @@ Copy code
     ps -a
     ```
 ---
-
-This `README` highlights the current issues and expected behavior in the Minishell project. Review each point carefully and ensure your implementation matches the requirements.
