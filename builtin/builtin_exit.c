@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:34:18 by nteechar          #+#    #+#             */
-/*   Updated: 2024/12/12 18:53:22 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:15:41 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,29 @@
 #include "../setup/setup.h"
 #include "builtin.h"
 
-
-static int	is_arg_correct(char *str)
+static int	is_number(char *str)
 {
 	int		num;
 	char	*str2;
 	int		compare_result;
 
+	if (*str == '+')
+		str++;
 	num = ft_atoi(str);
 	str2 = ft_itoa(num);
 	if (str2 == NULL)
 		return (FALSE);
 	compare_result = ft_strcmp(str, str2);
 	free(str2);
-	if (compare_result != 0)
-	{
-		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-		ft_putstr_fd(str, STDERR_FILENO);
-		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		return (FALSE);
-	}
-	return (TRUE);
+	return (compare_result == 0);
+}
+
+static int	numeric_arg_required_error(char *str)
+{
+	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+	return (2);
 }
 
 // exit minishell
@@ -44,27 +46,25 @@ static int	is_arg_correct(char *str)
 // set data->exit_status to ERROR if too many arguments
 
 // *** if argc == 0, argv == NULL --> free(data), and exit(data->exit_status)
-t_exit_status	builtin_exit(t_command *command, t_shell_data *data)
+t_exit_status	builtin_exit(t_command *cmd, t_shell_data *data)
 {
 	t_exit_status	exit_status;
 
-	if (command && command->argc > 2)
-	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", \
-			STDERR_FILENO);
-		return (ERROR);
-	}
 	exit_status = data->exit_status;
-	if (command)
+	if (cmd)
 	{
-		if (command->argc == 2)
+		if (cmd->argc > 2 && is_number(cmd->argv[1]))
 		{
-			if (is_arg_correct(command->argv[1]))
-				exit_status = ft_atoi(command->argv[1]) % 256;
-			else
-				exit_status = 2;
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			return (ERROR);
 		}
-		free_command(command);
+		else if (cmd->argc > 2)
+			exit_status = numeric_arg_required_error(cmd->argv[1]);
+		else if (cmd->argc == 2 && is_number(cmd->argv[1]))
+			exit_status = ft_atoi(cmd->argv[1]) % 256;
+		else
+			exit_status = numeric_arg_required_error(cmd->argv[1]);
+		free_command(cmd);
 	}
 	free_shell_data(data);
 	restore_terminal_settings();
