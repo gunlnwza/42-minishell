@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:38:43 by pesrisaw          #+#    #+#             */
-/*   Updated: 2024/12/13 13:01:29 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:42:45 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_sigint(int signal)
 	}
 	else
 	{
-		ft_putstr_fd("^C\n", STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	}
 }
 
@@ -48,7 +48,7 @@ static void	ft_sigquit(int signal)
 	}
 	else
 	{
-		ft_putstr_fd("^\\Quit (core dumped)\n", STDIN_FILENO);
+		ft_putstr_fd("Quit (core dumped)\n", STDIN_FILENO);
 	}
 }
 

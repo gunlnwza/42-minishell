@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 15:23:43 by pesrisaw          #+#    #+#             */
-/*   Updated: 2024/12/10 10:13:14 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:42:23 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_parentprocess(t_list *cmd_lst, int *prev_fd, t_execute *cmd);
 static void	issue_command_to_child(t_list **cmd_lst_first, t_list *cmd_lst,
 	int *prev_fd, t_shell_data *envp)
 {
+	restore_terminal_settings();
 	envp->exit_status = ft_childprocess(cmd_lst_first, cmd_lst, prev_fd, envp);
 	free_execute_command_list(cmd_lst_first);
 	builtin_exit(NULL, envp);

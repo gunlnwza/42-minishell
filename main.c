@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:50:49 by nteechar          #+#    #+#             */
-/*   Updated: 2024/12/12 19:23:29 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:54:45 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	main_loop(t_shell_data *data)
 		{
 			if (errno == ENOMEM)
 				data->exit_status = ENOMEM;
+			else
+				printf("exit\n");
 			builtin_exit(NULL, data);
 		}
 		g_signal_global = EXECUTE_MODE;
