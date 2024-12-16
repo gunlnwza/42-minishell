@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:38:43 by pesrisaw          #+#    #+#             */
-/*   Updated: 2024/12/13 15:42:45 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:02:48 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_sigint(int signal)
 {
 	if (signal != SIGINT)
 		return ;
-	if (g_signal_global == READ_MODE)
+	if (g_signal == READ_MODE)
 	{
 		rl_on_new_line();
 		rl_redisplay();
@@ -30,6 +30,7 @@ static void	ft_sigint(int signal)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		g_signal = 128 + signal;
 	}
 	else
 	{
@@ -41,7 +42,7 @@ static void	ft_sigquit(int signal)
 {
 	if (signal != SIGQUIT)
 		return ;
-	if (g_signal_global == READ_MODE)
+	if (g_signal == READ_MODE)
 	{
 		rl_on_new_line();
 		rl_redisplay();

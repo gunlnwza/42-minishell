@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:50:49 by nteechar          #+#    #+#             */
-/*   Updated: 2024/12/13 15:54:45 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:04:43 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "builtin/builtin.h"
 #include "execute/execute.h"
 
-int		g_signal_global;
+int		g_signal;
 char	*read_line(t_shell_data *data);
 
 static void	evaluate_line(char *line, t_shell_data *data)
@@ -48,8 +48,9 @@ static void	main_loop(t_shell_data *data)
 
 	while (TRUE)
 	{
-		g_signal_global = READ_MODE;
+		g_signal = READ_MODE;
 		line = read_line(data);
+		data->exit_status = g_signal;
 		if (line == NULL)
 		{
 			if (errno == ENOMEM)
@@ -58,7 +59,7 @@ static void	main_loop(t_shell_data *data)
 				printf("exit\n");
 			builtin_exit(NULL, data);
 		}
-		g_signal_global = EXECUTE_MODE;
+		g_signal = EXECUTE_MODE;
 		evaluate_line(line, data);
 		free(line);
 	}

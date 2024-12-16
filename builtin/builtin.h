@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 12:32:16 by nteechar          #+#    #+#             */
-/*   Updated: 2024/12/10 17:12:01 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:01:39 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../parser/parse_line.h"
 # include "../setup/setup.h"
 
-extern int		g_signal_global;
+extern int		g_signal;
 
 // < connect to execute >
 int				is_builtin_name(char *name);
