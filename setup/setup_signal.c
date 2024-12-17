@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:38:43 by pesrisaw          #+#    #+#             */
-/*   Updated: 2024/12/16 17:02:48 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:15:23 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ static void	ft_sigint(int signal)
 {
 	if (signal != SIGINT)
 		return ;
-	if (g_signal == READ_MODE)
+	if (g_signal == EXECUTE_MODE)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+	}
+	else
 	{
 		rl_on_new_line();
 		rl_redisplay();
@@ -30,11 +34,7 @@ static void	ft_sigint(int signal)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		g_signal = 128 + signal;
-	}
-	else
-	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		g_signal = 128 + signal;	
 	}
 }
 
@@ -42,14 +42,14 @@ static void	ft_sigquit(int signal)
 {
 	if (signal != SIGQUIT)
 		return ;
-	if (g_signal == READ_MODE)
+	if (g_signal == EXECUTE_MODE)
 	{
-		rl_on_new_line();
-		rl_redisplay();
+		ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
 	}
 	else
 	{
-		ft_putstr_fd("Quit (core dumped)\n", STDIN_FILENO);
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 
