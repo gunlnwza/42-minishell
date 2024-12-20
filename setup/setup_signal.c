@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 10:38:43 by pesrisaw          #+#    #+#             */
-/*   Updated: 2024/12/17 15:15:23 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:51:31 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_sigint(int signal)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		g_signal = 128 + signal;	
+		g_signal = 128 + signal;
 	}
 }
 
