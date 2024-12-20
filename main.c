@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 16:50:49 by nteechar          #+#    #+#             */
-/*   Updated: 2024/12/16 17:04:43 by nteechar         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:14:39 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static void	main_loop(t_shell_data *data)
 	{
 		g_signal = READ_MODE;
 		line = read_line(data);
-		data->exit_status = g_signal;
+		if (g_signal != READ_MODE)
+			data->exit_status = g_signal;
 		if (line == NULL)
 		{
 			if (errno == ENOMEM)
