@@ -6,7 +6,7 @@
 #    By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 13:18:31 by nteechar          #+#    #+#              #
-#    Updated: 2024/11/16 21:30:41 by nteechar         ###   ########.fr        #
+#    Updated: 2024/12/20 15:53:33 by nteechar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,8 +70,6 @@ SRCS := \
 
 OBJS := $(SRCS:%.c=%.o)
 
-COUNT := 0
-
 # phony rules
 .PHONY: all clean fclean re
 
@@ -89,16 +87,7 @@ re: fclean all
 
 # rules
 $(NAME): $(OBJS)
-	@echo "\n$(COUNT) .o files compiled"
-	@echo "$(GREEN)> create libft.a$(RESET)"
-	@echo "$(AR) $(NAME) $(firstword $(OBJS)) ... $(lastword $(OBJS))"
-	@$(AR) $(NAME) $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 
 %.o: %.c $(HEADERS)
-	@if [ $(COUNT) -eq 0 ]; then \
-		echo "$(GREEN)> compile .o files$(RESET)"; \
-	fi
-	@echo -n "|"
-	$(eval COUNT=$(shell echo $(COUNT) + 1 | bc))
-
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
