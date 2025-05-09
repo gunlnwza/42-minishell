@@ -10,5 +10,9 @@
 # How to run
 
 ```bash
-make ./minishell
+make
+```
+
+```bash
+./minishell
 ```
